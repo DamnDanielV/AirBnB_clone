@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """base model project AirBnB"""
 import uuid
+import models
 from datetime import datetime
-from models import storage
+
 
 
 class BaseModel:
@@ -21,7 +22,8 @@ class BaseModel:
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now(tz=None)
-            storage.new(self)
+            models.storage.new(self)
+            models.storage.save()
 
     def __str__(self):
         """returns a string representation"""
@@ -30,22 +32,13 @@ class BaseModel:
     def save(self):
         """updates the current date time"""
         self.updated_at = datetime.now(tz=None)
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """returns a dictionary containing keys/values"""
-        r_dict = self.__dict__
-        for key in r_dict:
-            if key == 'created_at':
-                r_dict[key] = self.created_at.isoformat()
-            elif key == 'updated_at':
-                r_dict[key] = self.updated_at.isoformat()
-            elif key == 'id':
-                r_dict[key] = self.id
-
-        r_dict['__class__'] = self.__class__.__name__
-
-        return r_dict
-
-if __name__ == '__main__':
-    BaseModel
+        return {
+                "id": self.id,
+                "__class__": self.__class__.__name__,
+                "updated_at": self.updated_at.isoformat(),
+                "created_at": self.created_at.isoformat()
+                }

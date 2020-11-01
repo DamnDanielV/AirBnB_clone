@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 import json
 
+from models.user import User
+from ..base_model import BaseModel
+to_dict = BaseModel.to_dict
 
 class FileStorage():
     """ serializes instances to a JSON file and deserializes JSON file to instances"""
@@ -19,7 +22,7 @@ class FileStorage():
     def save(self):
         """serializes """
         file = self.__file_path
-        d = FileStorage.__objects
+        d = self.__objects
         dict_obj = {}
         for key, value in d.items():
             dict_obj[key] = value.to_dict()
@@ -31,7 +34,9 @@ class FileStorage():
         file_name = self.__file_path
         try:
             with open(file_name, "r") as f:
-                self.__objects = json.load(f)
-                f.close()
+                new_obj = json.load(f)
+            for key, value in new_obj.items():
+                if BaseModel.__name__ in key:
+                    self.__objects[key] =  BaseModel(value)
         except:
             pass
