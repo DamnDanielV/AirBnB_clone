@@ -5,7 +5,6 @@ import models
 from datetime import datetime
 
 
-
 class BaseModel:
     """class base model"""
     def __init__(self, *args, **kwargs):
@@ -16,9 +15,12 @@ class BaseModel:
             for key, value in kwargs.items():
                 if key in accepted_args:
                     self.id = kwargs['id']
-                    self.created_at = datetime.strptime(str(kwargs['created_at']), '%Y-%m-%d %H:%M:%S.%f')
-                    self.my_number = kwargs['my_number']
-                    self.updated_at = datetime.strptime(str(kwargs['updated_at']), '%Y-%m-%d %H:%M:%S.%f')
+                    a_d_c = str(kwargs['created_at'])
+                    ad_c_2 = datetime.strptime(a_d_c, '%Y-%m-%dT%H:%M:%S.%f')
+                    self.created_at = ad_c_2
+                    a_d_u = str(kwargs['updated_at'])
+                    ad_u_2 = datetime.strptime(a_d_u, '%Y-%m-%dT%H:%M:%S.%f')
+                    self.updated_at = ad_u_2
         else:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now(tz=None)
@@ -27,7 +29,8 @@ class BaseModel:
 
     def __str__(self):
         """returns a string representation"""
-        return '[{}] ({}) {}'.format(self.__class__.__name__, self.id, self.__dict__)
+        return '[{}] ({}) {}'.format(self.__class__.__name__,
+                                     self.id, self.__dict__)
 
     def save(self):
         """updates the current date time"""

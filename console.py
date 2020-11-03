@@ -17,6 +17,8 @@ storage = models.storage
 class HBNBCommand(cmd.Cmd):
     """ Command interpreter """
 
+    prompt = '(hbnb) '
+    print()
     class_l = [
                 'BaseModel',
                 'User',
@@ -27,10 +29,8 @@ class HBNBCommand(cmd.Cmd):
                 'Review',
                 ]
 
-    def __init__(self):
-        """ Instatiation for class HBNB """
-        cmd.Cmd.__init__(self)
-        self.prompt = '(hbnb) '
+    def emptyline(self):
+        print
 
     def do_quit(self, line):
         """ Quit command to exit the program """
