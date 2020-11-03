@@ -6,22 +6,34 @@ import models
 
 from models.base_model import BaseModel
 from models.user import User
-
+from models.amenity import Amenity
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.review import Review
 storage = models.storage
+
 
 class HBNBCommand(cmd.Cmd):
     """ Command interpreter """
 
+    class_l = [
+                'BaseModel',
+                'User',
+                'Place',
+                'State',
+                'City',
+                'Amenity',
+                'Review',
+                ]
     def __init__(self):
         """ Instatiation for class HBNB """
         cmd.Cmd.__init__(self)
         self.prompt = '(hbnb) '
 
-
     def do_quit(self, line):
         """ Quit command to exit the program """
         return True
-
 
     def do_EOF(self, line):
         """ Signal to interrupt a file """
@@ -29,21 +41,17 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """reads a line from command prompt and create an instance"""
-
-        dict_class = {'BaseModel': BaseModel}
-
+        args = args.split(' ')
         if args == '':
             print('** class name missing **')
-        
-        elif args != 'BaseModel':
+        if args[0] not in self.class_l:
             print("** class doesn't exist **")
-
+            return
         else:
-            for key, value in dict_class.items():
-                if key == args:
-                    object_d = value()
-                    object_d.save()
-                    print(object_d.id)
+
+            object_d = eval('{}()'.format(args[0]))
+            object_d.save()
+            print(object_d.id)
 
     def do_show(self, args):
         """ Prints the string representation of 
@@ -53,8 +61,8 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
 
         else:
-            args = args.split()
-            if args[0] != 'BaseModel':
+            args = args.split(' ')
+            if args[0] not in self.class_l:
                 print("** class doesn't exist **")
                 return
             elif len(args) < 2:
@@ -77,8 +85,8 @@ class HBNBCommand(cmd.Cmd):
             print('** class name missing **')
 
         else:
-            args = args.split()
-            if args[0] != 'BaseModel':
+            args = args.split(' ')
+            if args[0] not in self.class_l:
                 print("** class doesn't exist **")
                 return
             elif len(args) < 2:
@@ -100,12 +108,12 @@ class HBNBCommand(cmd.Cmd):
         Prints all string representation of all instances based or not on the class name
         """
         args = args.split()
-        if args[0] != 'BaseModel':
+        if args[0] not in self.class_l:
             print("** class doesn't exist **")
             return
 
         objs_dict = storage.all()
-        
+
         for value in objs_dict.values():
             print(value)
 
@@ -119,7 +127,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             objs_dict = storage.all()
             args = args.split()
-            if args[0] != 'BaseModel':
+            if args[0] not in self.class_l:
                 print("** class doesn't exist **")
                 return
             elif len(args) < 2:
