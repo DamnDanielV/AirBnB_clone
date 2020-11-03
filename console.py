@@ -26,6 +26,7 @@ class HBNBCommand(cmd.Cmd):
                 'Amenity',
                 'Review',
                 ]
+
     def __init__(self):
         """ Instatiation for class HBNB """
         cmd.Cmd.__init__(self)
@@ -54,7 +55,7 @@ class HBNBCommand(cmd.Cmd):
             print(object_d.id)
 
     def do_show(self, args):
-        """ Prints the string representation of 
+        """ Prints the string representation of
         an instance based on the class name and id """
 
         if args == '':
@@ -68,7 +69,7 @@ class HBNBCommand(cmd.Cmd):
             elif len(args) < 2:
                 print('** instance id missing **')
                 return
-            
+
         storage.reload()
         objs_dict = storage.all()
 
@@ -80,7 +81,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, args):
         """Deletes an instance based on the class name and id"""
-        
+
         if args == '':
             print('** class name missing **')
 
@@ -105,7 +106,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         """
-        Prints all string representation of all instances based or not on the class name
+        Prints all string representation of all instances
         """
         args = args.split()
         if args[0] not in self.class_l:
