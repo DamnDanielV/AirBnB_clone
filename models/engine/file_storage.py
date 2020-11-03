@@ -5,8 +5,11 @@ from models.user import User
 from ..base_model import BaseModel
 to_dict = BaseModel.to_dict
 
+
 class FileStorage():
-    """ serializes instances to a JSON file and deserializes JSON file to instances"""
+    """ serializes instances to a JSON file
+        and deserializes JSON file to instances
+    """
     __file_path = 'file.json'
     __objects = {}
 
@@ -36,7 +39,9 @@ class FileStorage():
             with open(file_name, "r") as f:
                 new_obj = json.load(f)
             for key, value in new_obj.items():
-                if BaseModel.__name__ in key:
-                    self.__objects[key] =  BaseModel(value)
+                c_k = key.split('.')
+                self.__objects[key] = eval(
+                    "{}(**{})".format(c_k[0], value)
+                )
         except:
             pass
