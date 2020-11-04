@@ -1,6 +1,6 @@
 #!/usr/bin/python3
+"""module file_storage.py"""
 import json
-
 from models.user import User
 from ..base_model import BaseModel
 to_dict = BaseModel.to_dict
