@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Module file storage """
-import json
 
+import json
 from models.user import User
 from ..base_model import BaseModel
 to_dict = BaseModel.to_dict
@@ -19,12 +19,12 @@ class FileStorage():
         return self.__objects
 
     def new(self, obj):
-        """sets in __objects the obj with key <obj class name>.id"""
+        """sets in __objects the obje with key and id"""
         key_object = '{}.{}'.format(type(obj).__name__, obj.id)
         self.__objects[key_object] = obj
 
     def save(self):
-        """serializes """
+        """serializes objects to the json file"""
         file = self.__file_path
         d = self.__objects
         dict_obj = {}
@@ -34,7 +34,7 @@ class FileStorage():
             json.dump(dict_obj, f)
 
     def reload(self):
-        """if file exists, deserializes"""
+        """if file exists, deserializes JSON file"""
         file_name = self.__file_path
         try:
             with open(file_name, "r") as f:
