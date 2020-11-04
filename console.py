@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Command interpreter """
+""" Command interpreter to realize management of the project """
 
 import cmd
 import models
@@ -15,7 +15,7 @@ storage = models.storage
 
 
 class HBNBCommand(cmd.Cmd):
-    """ Command interpreter """
+    """ This class is the beginning of Command interpreter """
 
     prompt = '(hbnb) '
     class_l = [
@@ -29,6 +29,7 @@ class HBNBCommand(cmd.Cmd):
                 ]
 
     def emptyline(self):
+        """ Prints an empty line """
         print
 
     def do_quit(self, line):
