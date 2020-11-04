@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" Module file storage.py """
 import json
 
 from models.user import User
