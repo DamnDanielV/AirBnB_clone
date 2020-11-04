@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Module file storage """
+""" Module file storage to handled objects """
 
 import json
 from datetime import datetime
