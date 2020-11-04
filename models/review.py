@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""module review"""
+"""module review that inherits from BaseModel"""
 from models.base_model import BaseModel
 
 
