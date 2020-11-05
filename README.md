@@ -4,7 +4,7 @@
 
 The AirBnb_clone Project is the first of a series of projects we will do in our process to become Full-Stack Software Engineers. The first phase consists in a custom command-line interface that allow us to create, update an delete instances of different classes. Also, AirBnB project has a storage class and a BaseModel class that allows the console do its work.
 
-## Usage
+## How to use it
 
 The console works in interactive an non-interactive mode, like unix shell. It prints the prompt (hbnb) and waits an instruction:
 
