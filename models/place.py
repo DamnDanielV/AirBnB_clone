@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""model place taht inherits from BaseModel"""
 from models.base_model import BaseModel
 
 

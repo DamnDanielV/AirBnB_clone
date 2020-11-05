@@ -9,23 +9,21 @@ class BaseModel:
     """class base model"""
     def __init__(self, *args, **kwargs):
         """initialize an instance"""
-        self.updated_at = datetime.now(tz=None)
         if kwargs:
-            accepted_args = ['created_at', 'id', 'my_number', 'updated_at']
-            for key, value in kwargs.items():
-                if key in accepted_args:
-                    self.id = kwargs['id']
-                    a_d_c = str(kwargs['created_at'])
-                    ad_c_2 = datetime.strptime(a_d_c, '%Y-%m-%dT%H:%M:%S.%f')
-                    self.created_at = ad_c_2
-                    a_d_u = str(kwargs['updated_at'])
-                    ad_u_2 = datetime.strptime(a_d_u, '%Y-%m-%dT%H:%M:%S.%f')
-                    self.updated_at = ad_u_2
+            self.__dict__ = kwargs
+            try:
+                self.__dict__['updated_at'] = datetime.strptime(
+                    self.__dict__['updated_at'], "%Y-%m-%dT%H:%M:%S.%f")
+                self.__dict__['created_at'] = datetime.strptime(
+                    self.__dict__['created_at'], "%Y-%m-%dT%H:%M:%S.%f")
+            except Exception as e:
+                pass
         else:
             self.id = str(uuid.uuid4())
-            self.created_at = datetime.now(tz=None)
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
             models.storage.new(self)
-            models.storage.save()
+            # models.storage.save()
 
     def __str__(self):
         """returns a string representation"""
@@ -34,7 +32,7 @@ class BaseModel:
 
     def save(self):
         """updates the current date time"""
-        self.updated_at = datetime.now(tz=None)
+        self.updated_at = datetime.now()
         models.storage.save()
 
     def to_dict(self):

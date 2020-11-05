@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""model amerity"""
+"""
+model amerity that inherits from BaseModel
+"""
 from models.base_model import BaseModel
 
 

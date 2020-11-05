@@ -1,5 +1,7 @@
 #!/usr/bin/python3
-"""module city"""
+"""
+module city that inherits from base model
+"""
 from models.base_model import BaseModel
 
 
