@@ -134,10 +134,6 @@ class HBNBCommand(cmd.Cmd):
         """
         if len(args) == 1:
             args = [e for e in args[0].split(' ')]
-        objs_dict = storage.all()
-        if '{}.{}'.format(args[0], args[1]) not in objs_dict.keys():
-            print("** no instance found **")
-            return
         if args[0] == '':
             print("** class name missing **")
             return
@@ -155,6 +151,10 @@ class HBNBCommand(cmd.Cmd):
             return
 
         storage.reload()
+        objs_dict = storage.all()
+        if objs_dict is None:
+            print("** no instance found **")
+            return
 
         key = "{}.{}".format(args[0], args[1])
         if key in objs_dict.keys():
