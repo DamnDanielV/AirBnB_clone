@@ -112,7 +112,10 @@ class HBNBCommand(cmd.Cmd):
         """
         args = [e for e in args[0].split(' ')]
         obj_p = []
-        storage.reload()
+        if len(args) == 1:
+            for i in storage.all().values():
+                print(i)
+            return
         if args[0] not in self.class_l:
             print("** class doesn't exist **")
             return
