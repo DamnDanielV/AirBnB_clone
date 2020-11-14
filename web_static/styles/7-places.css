@@ -1,0 +1,32 @@
+.places h1 {
+    padding-top: 15px;
+    font-size: 30px;
+    color: black;
+}
+article {
+    width: 390px;
+    padding: 20px;
+    margin: 20px;
+    border: solid #FF5A5F 1px;
+    border-radius: 4px;
+}
+article h2 {
+    color: black;
+}
+.list {
+    /* display: inline-flex; */
+    width: 100%;
+}
+.line1 {
+
+    text-align: center;
+}
+.line1 article {
+    display: inline-block;
+}
+.line2 {
+    text-align: center;
+}
+.line2 article {
+    display: inline-block;
+}
